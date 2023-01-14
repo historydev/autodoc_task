@@ -1,0 +1,47 @@
+<!--<nav>-->
+
+<!--  Works but have bugs, you can try :)-->
+
+<!--	<ng-template [ngIf]="window.innerWidth > 1000">-->
+<!--		<li>-->
+<!--			<a routerLink="">Главная</a>-->
+<!--		</li>-->
+<!--		<li>-->
+<!--			<a routerLink="/news">Все новости</a>-->
+<!--		</li>-->
+<!--	</ng-template>-->
+
+<!--	<ng-template [ngIf]="window.innerWidth <= 1000">-->
+<!--		<button mat-icon-button [matMenuTriggerFor]="menu">-->
+<!--			<mat-icon>menu</mat-icon>-->
+<!--		</button>-->
+<!--		<mat-menu #menu>-->
+<!--			<ng-template matMenuContent>-->
+<!--				<button mat-menu-item><a routerLink="">Главная</a></button>-->
+<!--				<button mat-menu-item><a routerLink="/news">Все новости</a></button>-->
+<!--			</ng-template>-->
+<!--		</mat-menu>-->
+<!--	</ng-template>-->
+
+<!--</nav>-->
+
+<nav>
+	<li>
+		<a routerLink="">Главная</a>
+	</li>
+	<li>
+		<a routerLink="/news">Все новости</a>
+	</li>
+</nav>
+
+<nav class="mobile">
+	<button mat-icon-button [matMenuTriggerFor]="menu">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<mat-menu #menu="matMenu" class="mat_menu">
+		<ng-template matMenuContent class="content">
+			<button mat-menu-item class="menu_item"><a routerLink="">Главная</a></button>
+			<button mat-menu-item class="menu_item"><a routerLink="/news">Все новости</a></button>
+		</ng-template>
+	</mat-menu>
+</nav>

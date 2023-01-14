@@ -1,0 +1,31 @@
+mat-card {
+	width: 100%;
+	height: 100%;
+
+	.see_more {
+		background: #cd242fe6;
+		color: #fff
+	}
+}
+
+:host(.news-list) {
+	padding: 20px 0 0 20px;
+}
+
+@media screen and (max-width: 500px) {
+	:host(.news-list) {
+		padding: 5px 0 0 0;
+		mat-card {
+			border-radius: 0;
+
+			mat-card-title {
+				font-size: 17px;
+			}
+
+			mat-card-subtitle {
+				font-size: 14px;
+			}
+
+		}
+	}
+}

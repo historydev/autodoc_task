@@ -1,0 +1,28 @@
+<mat-card>
+	<mat-card-header>
+		<img
+			mat-card-avatar
+			[src]="avatar"
+		 alt="Логотип проекта"/>
+		<mat-card-title>
+			{{ title }}
+		</mat-card-title>
+		<mat-card-subtitle>{{ sub_title }} - {{ date | date}}</mat-card-subtitle>
+	</mat-card-header>
+	<img
+		mat-card-image
+		[src]="img"
+	 alt="Изображение новости"/>
+	<mat-card-content>
+		{{ description }}
+	</mat-card-content>
+	<mat-card-actions>
+		<button
+			class="see_more"
+			mat-raised-button
+		>
+			{{ button_text }}
+		</button>
+	</mat-card-actions>
+	<mat-card-footer></mat-card-footer>
+</mat-card>
