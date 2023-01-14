@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import {news_selectors} from "../../state/news/selectors";
 
 @Component({
 	selector: 'app-news',
@@ -7,37 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-	private _grid_cols: number = 4;
+	private readonly store = inject(Store);
 
 	constructor() {
 	}
 
 	ngOnInit(): void {
-	}
-
-	public get grid_cols(): number {
-		return this._grid_cols;
-	}
-
-	public set grid_cols(val: number) {
-		this._grid_cols = val;
-	}
-
-	onResize(event: any): void {
-		const w = event.target.innerWidth;
-		const mobile = w <= 400;
-		const tablet = w <= 1000;
-
-		switch (true) {
-		case mobile:
-			this.grid_cols = 1;
-			return;
-		case tablet:
-			this.grid_cols = 2;
-			return;
-		}
-
-		return
+		this.store.pipe(select(news_selectors["Loading?"]))
 	}
 
 }

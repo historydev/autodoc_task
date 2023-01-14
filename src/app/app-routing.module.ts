@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {NewsComponent} from "./components/news/news.component";
-import {NewsSingleComponent} from "./components/news-single/news-single.component";
+import {NewsDetailComponent} from "./components/news-detail/news-detail.component";
 import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
@@ -17,7 +17,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'news/:id',
-		component: NewsSingleComponent,
+		component: NewsDetailComponent,
 		title: 'AUTODOC.RU - Новость'
 	}
 ];

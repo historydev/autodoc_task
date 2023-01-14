@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NewsComponent} from './components/news/news.component';
-import {NewsSingleComponent} from './components/news-single/news-single.component';
+import {NewsDetailComponent} from './components/news-detail/news-detail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from "./services/http/http.service";
 import {HomeComponent} from './components/home/home.component';
@@ -30,7 +30,7 @@ registerLocaleData(LocaleRu)
 	declarations: [
 		AppComponent,
 		NewsComponent,
-		NewsSingleComponent,
+		NewsDetailComponent,
 		HomeComponent,
 		HeaderComponent,
 		FooterComponent,
