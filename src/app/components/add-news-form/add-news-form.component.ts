@@ -11,9 +11,9 @@ export class AddNewsFormComponent {
 
 	news_form = new FormGroup({
 		title: new FormControl(''),
-		img: new FormControl(''),
-		desc: new FormControl(''),
-		category: new FormControl(''),
+		titleImageUrl: new FormControl(''),
+		description: new FormControl(''),
+		categoryType: new FormControl(''),
 	})
 
 	constructor(public dialogRef: MatDialogRef<AddNewsFormComponent>,) {

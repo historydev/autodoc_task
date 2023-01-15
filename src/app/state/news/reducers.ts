@@ -52,7 +52,7 @@ const reducer = createReducer(
 	on(news_actions["Add News"], (state: NewsStateModel, props: NewsAddModel) => {
 		return {
 			...state,
-			news: [props, ...state.news]
+			news: [...state.news, ...props.news]
 		}
 	}),
 );

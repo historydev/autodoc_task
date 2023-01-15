@@ -16,7 +16,7 @@
 			   placeholder="Вставьте ссылку на изображение"
 			   aria-label="Ссылка на постер"
 			   matInput
-			   formControlName="img"
+			   formControlName="titleImageUrl"
 			   required
 		/>
 	</mat-form-field>
@@ -26,13 +26,13 @@
 				  placeholder="Введите описание новости"
 				  aria-label="Описание новости"
 				  matInput
-				  formControlName="desc"
+				  formControlName="description"
 				  required
 		></textarea>
 	</mat-form-field>
 	<mat-form-field appearance="fill">
 		<mat-label>Категория</mat-label>
-		<mat-select formControlName="category" required>
+		<mat-select formControlName="categoryType" required>
 			<mat-option value="Автомобильные новости">
 				Автомобильные новости
 			</mat-option>

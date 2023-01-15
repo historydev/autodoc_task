@@ -7,6 +7,7 @@ import {NewsSuccessResponseModel} from "../../models/news/success_response";
 import {NewsModel} from "../../models/news/news";
 import {Observable} from "rxjs";
 import {NewsItemModel} from "../../models/news/item";
+import {NewsAddModel} from "../../models/news/add";
 
 // Я не гений, но быстро учусь, на текущей работе не у кого учиться
 
@@ -39,7 +40,11 @@ export class NewsStateService {
 		this._page.subscribe(this.request);
 	}
 
-	public next_page() {
+	public add_news(data: NewsAddModel): void {
+		this._store.dispatch(news_actions["Add News"](data));
+	}
+
+	public next_page(): void {
 		this._store.dispatch(news_actions["Next Page"]());
 	}
 

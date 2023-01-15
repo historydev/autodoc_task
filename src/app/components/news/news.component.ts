@@ -20,8 +20,17 @@ export class NewsComponent implements OnInit {
 		private state_manager: NewsStateService,
 		private dialog: MatDialog
 	) {
+		const news = localStorage.getItem('news');
+		if(news) {
+			console.log(JSON.parse(news));
+			this.news.unshift(...JSON.parse(news));
+		}
 		this.state_manager.news.subscribe(n => {
-			this.news.push(...n.filter((el: NewsItemModel) => !this.news.includes(el)))
+			const filtered = n.filter((el: NewsItemModel) => !this.news.includes(el));
+			const custom_news = filtered.filter((el: NewsItemModel) => el.custom);
+			const default_news = filtered.filter((el: NewsItemModel) => !el.custom);
+			this.news.unshift(...custom_news);
+			this.news.push(...default_news);
 		});
 		state_manager.init();
 		state_manager.request(1);
@@ -40,7 +49,30 @@ export class NewsComponent implements OnInit {
 			disableClose: true
 		});
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`); // Pizza!
+			if(result) {
+				const s = localStorage;
+				const news_item = s.getItem('news');
+				const news = [
+					{
+						...result,
+						id: Math.floor(Math.random() * 99999),
+						publishedDate: new Date(Date.now()),
+						custom: true
+					}
+				]
+
+				if(!news_item) {
+					s.setItem('news', JSON.stringify(news));
+				} else {
+					const s_news = JSON.parse(news_item);
+					s_news.unshift(...news);
+					s.setItem('news', JSON.stringify(s_news));
+				}
+
+				this.state_manager.add_news({
+					news
+				});
+			}
 		});
 	}
 

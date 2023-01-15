@@ -7,4 +7,5 @@ export interface NewsItemModel {
 	fullUrl: string;
 	titleImageUrl: string;
 	categoryType: string;
+	custom?: boolean;
 }
