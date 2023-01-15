@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StateManangerService } from './state-mananger.service';
+import { StateManangerService } from './news-mananger.service';
 
 describe('StateManangerService', () => {
   let service: StateManangerService;

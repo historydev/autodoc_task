@@ -1,11 +1,28 @@
+<div class="top_bar">
+	<h1>Новости</h1>
+	<button
+		class="add_button"
+		mat-raised-button
+		(click)="open_add_gialog()"
+	>
+		Добавить новость
+	</button>
+</div>
+
 <div class="news" fxLayout="row wrap" fxLayout.xs="column">
-		<app-news-item
-			class="news-list"
-			date="2023-01-13T00:00:00"
+	<div class="lds-spinner" *ngIf="loading | async"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+	<app-news-item
+			*ngFor="let item of news"
+			[title]="item.title"
+			[description]="item.description"
+			[date]="item.publishedDate"
+			[img]="item.titleImageUrl"
+			[category]="item.categoryType"
+			[ngClass]="['news-list', 'list-elem']"
 			fxFlex.xs="100%"
 			fxFlex.sm="50%"
 			fxFlex.md="33.3%"
 			fxFlex="25%"
-			*ngFor="let i of [1,2,3,4,5]"
 		></app-news-item>
+
 </div>

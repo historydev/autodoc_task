@@ -1,0 +1,59 @@
+<mat-card-title>Добавить новость</mat-card-title>
+<form [formGroup]="news_form" (ngSubmit)="on_submit()">
+	<mat-form-field>
+		<mat-label>Название новости</mat-label>
+		<input type="text"
+			   placeholder="Введите название"
+			   aria-label="Название новости"
+			   matInput
+			   formControlName="title"
+			   required
+		/>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Ссылка на постер</mat-label>
+		<input type="text"
+			   placeholder="Вставьте ссылку на изображение"
+			   aria-label="Ссылка на постер"
+			   matInput
+			   formControlName="img"
+			   required
+		/>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Описание новости</mat-label>
+		<textarea type="text"
+				  placeholder="Введите описание новости"
+				  aria-label="Описание новости"
+				  matInput
+				  formControlName="desc"
+				  required
+		></textarea>
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Категория</mat-label>
+		<mat-select formControlName="category" required>
+			<mat-option value="Автомобильные новости">
+				Автомобильные новости
+			</mat-option>
+			<mat-option value="Новости компании">
+				Новости компании
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<div class="controls">
+		<button
+			mat-raised-button
+			(click)="onNoClick()"
+		>
+			Отмена
+		</button>
+		<button
+			class="add_button"
+			mat-raised-button
+			type="submit"
+		>
+			Добавить
+		</button>
+	</div>
+</form>

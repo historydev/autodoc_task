@@ -1,11 +1,37 @@
 mat-card {
 	width: 100%;
 	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-top: 0;
+
+	mat-card-header {
+		margin-top: 20px;
+	}
+
+	mat-card-content {
+		min-width: 100%;
+	}
 
 	.see_more {
 		background: #cd242fe6;
 		color: #fff
 	}
+
+	.image_box {
+		margin-top: 0;
+		margin-bottom: auto;
+	}
+
+	.image {
+		object-fit: contain;
+		object-position: center;
+		border-top-right-radius: 4px;
+		border-top-left-radius: 4px;
+	}
+
 }
 
 :host(.news-list) {

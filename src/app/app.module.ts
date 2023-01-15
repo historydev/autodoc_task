@@ -18,11 +18,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from "./app.material.module";
 import {FormsModule} from "@angular/forms";
 import LocaleRu from '@angular/common/locales/ru';
-import {registerLocaleData} from "@angular/common";
-import {FlexLayoutModule} from "@angular/flex-layout";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
+import {NgOptimizedImage, registerLocaleData} from "@angular/common";
+import store_config from './state/config.json';
+import {StoreModule} from "@ngrx/store";
+import news_reducer from "./state/news/reducers";
+import {FullRouterStateSerializer, StoreRouterConnectingModule} from "@ngrx/router-store";
+import {AddNewsFormComponent} from "./components/add-news-form/add-news-form.component";
+import { ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(LocaleRu)
 
@@ -36,7 +38,8 @@ registerLocaleData(LocaleRu)
 		FooterComponent,
 		LogoComponent,
 		NavigationComponent,
-		NewsItemComponent
+		NewsItemComponent,
+		AddNewsFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -46,10 +49,13 @@ registerLocaleData(LocaleRu)
 		FontAwesomeModule,
 		BrowserAnimationsModule,
 		AppMaterialModule,
-		FlexLayoutModule,
-		MatToolbarModule,
-		MatMenuModule,
-		MatIconModule
+		StoreModule.forRoot({}),
+		StoreModule.forFeature(store_config.key, news_reducer),
+		StoreRouterConnectingModule.forRoot({
+			serializer: FullRouterStateSerializer,
+		}),
+		NgOptimizedImage,
+		ReactiveFormsModule
 	],
 	providers: [
 		HttpService,

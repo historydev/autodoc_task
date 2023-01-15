@@ -1,5 +1,4 @@
 nav {
-	min-width: 200px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -23,10 +22,11 @@ nav {
 			color: #fff;
 
 			&:hover {
-				background: #eee;
-				color: rgba(205, 36, 47);
+				//background: #eee;
+				//color: #cd242fe6;
 				text-decoration: underline;
-				border-bottom: 1px solid #cd242fe6;
+				//border-bottom: 1px solid #cd242fe6;
+				border-bottom: 1px solid #fff;
 			}
 
 		}
@@ -38,7 +38,7 @@ nav {
 :host {
 	min-width: auto;
 	height: 100%;
-	margin-left: 5%;
+	margin-left: 1%;
 }
 
 .mobile {

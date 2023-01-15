@@ -1,18 +1,36 @@
-<mat-card>
+<mat-card class="card">
+	<div class="image_box" mat-card-image>
+		<picture>
+			<img *ngIf="!img?.startsWith('data:'); else elseBlock"
+				 class="image"
+				 [ngSrc]="img || 'https://www.autodoc.ru/assets/img/news_bg.png'"
+				 alt="{{ title }}"
+				 fill
+				 priority
+				 style="position: initial"
+			/>
+			<ng-template #elseBlock>
+				<img
+					class="image"
+					[ngSrc]="img"
+					alt="{{ title }}"
+					fill
+					priority
+					style="position: initial"
+				/>
+			</ng-template>
+		</picture>
+	</div>
 	<mat-card-header>
 		<img
 			mat-card-avatar
 			[src]="avatar"
-		 alt="Логотип проекта"/>
+			alt="Логотип проекта"/>
 		<mat-card-title>
 			{{ title }}
 		</mat-card-title>
-		<mat-card-subtitle>{{ sub_title }} - {{ date | date}}</mat-card-subtitle>
+		<mat-card-subtitle>{{ category }} - {{ date | date}}</mat-card-subtitle>
 	</mat-card-header>
-	<img
-		mat-card-image
-		[src]="img"
-	 alt="Изображение новости"/>
 	<mat-card-content>
 		{{ description }}
 	</mat-card-content>

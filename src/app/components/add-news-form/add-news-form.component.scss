@@ -1,0 +1,43 @@
+
+$width: 100%;
+
+form {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 35px;
+}
+
+mat-form-field {
+	width: $width;
+	margin: 0 auto;
+}
+
+textarea {
+	min-height: 150px;
+	max-height: 500px;
+}
+
+.controls {
+	width: $width;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.add_button {
+	min-width: 100px;
+	background: #cd242fe6;
+	color: #fff;
+}
+
+::ng-deep .mat-focused .mat-form-field-ripple {
+	border-top: 2px solid #cd242fe6 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+	color: #cd242fe6 !important;
+}
+
+
