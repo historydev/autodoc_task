@@ -13,6 +13,18 @@
 	border-top-right-radius: 50%;
 }
 
+::ng-deep .error {
+	background: rgba(205, 36, 47, 0.9019607843);
+	span {
+		width: 100%;
+		text-align: center;
+		color: #fff;
+	}
+	transform: translateY(calc(-100vh/2 - 48px/2)) !important;
+	border-radius: 0 !important;
+	margin: 0 !important;
+}
+
 .top_bar {
 	height: 60px;
 	display: flex;

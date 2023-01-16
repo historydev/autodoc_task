@@ -1,39 +1,51 @@
-import {Component, OnInit} from '@angular/core';
-import {NewsStateService} from "../../services/news-state-manager/news-mananger.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NewsStateService} from "../../services/news/state-manager/news-mananger.service";
 import {NewsItemModel} from "../../models/news/item";
 import {MatDialog} from "@angular/material/dialog";
 import {AddNewsFormComponent} from "../add-news-form/add-news-form.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Subscription} from "rxjs";
 
 @Component({
 	selector: 'app-news',
 	templateUrl: './news.component.html',
 	styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
 
 	public readonly news: NewsItemModel[] = [];
-	public readonly loading = this.state_manager.loading;
-	public readonly success = this.state_manager.success;
-	public readonly error = this.state_manager.error;
+	public readonly loading = this.news_state_manager.loading;
+	public readonly success = this.news_state_manager.success;
+	public readonly error = this.news_state_manager.error;
+
+	private _subs: Subscription[] = []
 
 	constructor(
-		private state_manager: NewsStateService,
-		private dialog: MatDialog
+		private news_state_manager: NewsStateService,
+		private dialog: MatDialog,
+		private snack: MatSnackBar
 	) {
-		const news = localStorage.getItem('news');
-		if(news) {
-			console.log(JSON.parse(news));
-			this.news.unshift(...JSON.parse(news));
-		}
-		this.state_manager.news.subscribe(n => {
+		const all_news = this.news_state_manager.all.subscribe(n => {
 			const filtered = n.filter((el: NewsItemModel) => !this.news.includes(el));
-			const custom_news = filtered.filter((el: NewsItemModel) => el.custom);
-			const default_news = filtered.filter((el: NewsItemModel) => !el.custom);
-			this.news.unshift(...custom_news);
-			this.news.push(...default_news);
+			this.news.push(...filtered);
 		});
-		state_manager.init();
-		state_manager.request(1);
+		const news_error = this.error?.subscribe(err => {
+			if(err) {
+				snack.open('Ошибка при загрузке новостей :(', undefined, {
+					duration: 99999,
+					panelClass: 'error'
+				})
+			}
+		});
+
+		this._subs.push(all_news);
+
+		if(news_error) {
+			this._subs.push(news_error);
+		}
+
+		news_state_manager.init();
+		news_state_manager.req_list();
 	}
 
 	private debounce(func: Function, timeout = 300) {
@@ -48,7 +60,7 @@ export class NewsComponent implements OnInit {
 		const dialogRef = this.dialog.open(AddNewsFormComponent, {
 			disableClose: true
 		});
-		dialogRef.afterClosed().subscribe(result => {
+		const add_news_dialog = dialogRef.afterClosed().subscribe(result => {
 			if(result) {
 				const s = localStorage;
 				const news_item = s.getItem('news');
@@ -57,7 +69,7 @@ export class NewsComponent implements OnInit {
 						...result,
 						id: Math.floor(Math.random() * 99999),
 						publishedDate: new Date(Date.now()),
-						custom: true
+						url: 'avto-novosti/jaguar_i_pace'
 					}
 				]
 
@@ -69,11 +81,15 @@ export class NewsComponent implements OnInit {
 					s.setItem('news', JSON.stringify(s_news));
 				}
 
-				this.state_manager.add_news({
+				this.news.unshift(...news);
+
+				this.news_state_manager.add({
 					news
 				});
 			}
 		});
+
+		this._subs.push(add_news_dialog);
 	}
 
 	private on_scroll = (e: Event) => {
@@ -82,7 +98,7 @@ export class NewsComponent implements OnInit {
 			const scroll_top = item.getBoundingClientRect().top;
 			const w_scroll_top = window.scrollY;
 			if(scroll_top <= 800) {
-				this.state_manager.next_page();
+				this.news_state_manager.next_page();
 				window.scrollTo(0, w_scroll_top)
 			}
 		}
@@ -90,6 +106,10 @@ export class NewsComponent implements OnInit {
 
 	ngOnInit(): void {
 		window.onscroll = this.debounce(this.on_scroll);
+	}
+
+	ngOnDestroy() {
+		this._subs.forEach(sub => sub.unsubscribe());
 	}
 
 }

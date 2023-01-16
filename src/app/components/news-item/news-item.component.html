@@ -1,9 +1,9 @@
 <mat-card class="card">
 	<div class="image_box" mat-card-image>
 		<picture>
-			<img *ngIf="!img?.startsWith('data:'); else elseBlock"
+			<img *ngIf="!titleImageUrl?.startsWith('data:'); else elseBlock"
 				 class="image"
-				 [ngSrc]="img || 'https://www.autodoc.ru/assets/img/news_bg.png'"
+				 [ngSrc]="titleImageUrl || 'https://www.autodoc.ru/assets/img/news_bg.png'"
 				 alt="{{ title }}"
 				 fill
 				 priority
@@ -12,7 +12,7 @@
 			<ng-template #elseBlock>
 				<img
 					class="image"
-					[ngSrc]="img"
+					[ngSrc]="titleImageUrl"
 					alt="{{ title }}"
 					fill
 					priority
@@ -29,7 +29,7 @@
 		<mat-card-title>
 			{{ title }}
 		</mat-card-title>
-		<mat-card-subtitle>{{ category }} - {{ date | date}}</mat-card-subtitle>
+		<mat-card-subtitle>{{ categoryType }} - {{ publishedDate | date}}</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-content>
 		{{ description }}
@@ -39,7 +39,9 @@
 			class="see_more"
 			mat-raised-button
 		>
-			{{ button_text }}
+			<a [href]="'news/' + url">
+				{{ button_text }}
+			</a>
 		</button>
 	</mat-card-actions>
 	<mat-card-footer></mat-card-footer>

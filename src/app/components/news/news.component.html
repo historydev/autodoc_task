@@ -9,15 +9,29 @@
 	</button>
 </div>
 
-<div class="news" fxLayout="row wrap" fxLayout.xs="column">
-	<div class="lds-spinner" *ngIf="loading | async"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="news" fxLayout="row wrap" fxLayout.xs="column" *ngIf="!(error | async)">
+	<div class="lds-spinner" *ngIf="loading | async">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
 	<app-news-item
 			*ngFor="let item of news"
 			[title]="item.title"
 			[description]="item.description"
-			[date]="item.publishedDate"
-			[img]="item.titleImageUrl"
-			[category]="item.categoryType"
+			[publishedDate]="item.publishedDate"
+			[titleImageUrl]="item.titleImageUrl"
+			[url]="item.url"
+			[categoryType]="item.categoryType"
 			[ngClass]="['news-list', 'list-elem']"
 			fxFlex.xs="100%"
 			fxFlex.sm="50%"
@@ -26,3 +40,5 @@
 		></app-news-item>
 
 </div>
+
+

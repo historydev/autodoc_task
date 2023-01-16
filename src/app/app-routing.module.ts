@@ -15,9 +15,14 @@ const routes: Routes = [
 		title: 'AUTODOC.RU - Новости'
 	},
 	{
-		path: 'news/:id',
+		path: 'news/:category/:name',
 		component: NewsDetailComponent,
 		title: 'AUTODOC.RU - Новость'
+	},
+	{
+		path: '**',
+		component: NewsComponent,
+		title: 'AUTODOC.RU - Новости'
 	}
 ];
 

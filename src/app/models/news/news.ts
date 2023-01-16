@@ -3,8 +3,8 @@ import {EntityState} from "@ngrx/entity";
 import {Observable} from "rxjs";
 
 export interface NewsModel {
+	max_pages: Observable<number>;
 	news: Observable<NewsItemModel[]>;
-	curr_count: Observable<number>;
 	items_per_page: Observable<number>;
 	page: Observable<number>;
 	total_count: Observable<number>;
@@ -14,8 +14,8 @@ export interface NewsModel {
 }
 
 export interface NewsStateModel extends EntityState<NewsStateModel> {
+	max_pages: number;
 	news: NewsItemModel[];
-	curr_count: number;
 	items_per_page: number;
 	page: number;
 	total_count: number;

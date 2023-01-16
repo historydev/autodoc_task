@@ -76,10 +76,5 @@
 @media screen and (max-width: 400px) {
 	:host(.footer) {
 		margin: 20px auto;
-		.logo {
-			.cogs, .ext {
-				color: #999 !important;
-			}
-		}
 	}
 }

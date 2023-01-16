@@ -1,1 +1,8 @@
-<p>news-single works!</p>
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>{{ item?.title }}</mat-card-title>
+		<mat-card-subtitle>{{ item?.categoryType }} - {{ item?.publishedDate | date }}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content [innerHTML]="item?.text || '' | safe: 'html'">
+	</mat-card-content>
+</mat-card>

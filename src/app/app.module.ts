@@ -25,6 +25,9 @@ import news_reducer from "./state/news/reducers";
 import {FullRouterStateSerializer, StoreRouterConnectingModule} from "@ngrx/router-store";
 import {AddNewsFormComponent} from "./components/add-news-form/add-news-form.component";
 import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import {NewsEffects} from "./state/news/effects";
+import {SafePipeModule} from "safe-pipe";
 
 registerLocaleData(LocaleRu)
 
@@ -55,7 +58,9 @@ registerLocaleData(LocaleRu)
 			serializer: FullRouterStateSerializer,
 		}),
 		NgOptimizedImage,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		EffectsModule.forRoot([NewsEffects]),
+		SafePipeModule
 	],
 	providers: [
 		HttpService,
